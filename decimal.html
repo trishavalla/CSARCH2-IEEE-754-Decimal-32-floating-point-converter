@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IEEE-754 Decimal-32 Floating-Point Converter</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            font-family: Lucida Console;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #076907;
+            padding: 20px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 18px;
+            color: white;
+            margin: 0;
+            text-align: left;
+            margin-left: 10px;
+        }
+
+        header h1 span {
+            color: #a9fe54;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            margin: 0px 10px 10px;
+            padding: 0;
+            flex-direction: column; /* Make the content inside the container stack vertically */
+        }
+
+        .container-title {
+            margin-bottom: 10px; /* Add some space below the title */
+            font-weight: bold;
+            font-size: 25px;
+        }
+
+        .converter-box {
+            width: 600px;
+            border: 1.5px solid #000000;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            background-color: #E7E9EC;
+            display: flex;
+            flex-direction: column; /* Stack items vertically */
+            align-items: center; /* Center align children horizontally */
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            font-weight: bold;
+            font-size: 32px;
+            justify-content: center;
+        }
+
+        .input-group input {
+            width: 14rem;
+            padding: .625rem;
+            margin-right: 10px;
+            border: 1px solid;
+            border-radius: 3px;
+            font-size: 29px;
+        }
+
+        .input-group .exponent-input {
+            width: 5rem; /* Set a smaller width for the exponent input */
+            font-size: 20px;
+            padding: .375rem;
+            align-self: flex-start;
+        }
+
+        .input-group span {
+            margin-right: 10px;
+        }
+
+        .round-off-group {
+            margin-bottom: 30px;
+            width: 100%;
+            display: flex;
+            flex-direction: column; /* Stack items vertically */
+            align-items: flex-start; /* Align items to the left */
+        }
+
+        .round-off-group .round-off-label {
+            margin-bottom: 5px;
+        }
+
+        .round-off-group select {
+            width: 450px;
+            padding: .625rem;
+            border: 1px solid;
+            border-radius: 3px;
+        }
+
+        .convert-button {
+            width: 450px;
+            padding: 10px;
+            background-color: #ccff99;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .convert-button:hover {
+            background-color: #99ff66;
+        }
+
+        /* Remove default link styles */
+        .convert-button a {
+            text-decoration: none; /* Remove underline */
+            color: inherit; /* Use the button's text color */
+            display: block; /* Ensure it covers the whole button area */
+            width: 100%; /* Make sure it fills the button */
+            height: 100%; /* Make sure it fills the button */
+        }
+
+        footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 12px;
+            color:#076907;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>IEEE-754 Decimal-32 floating-point <span>converter</span></h1>
+    </header>
+    <div class="container">
+        <div class="container-title">
+            Enter decimal:
+        </div>
+        <div class="converter-box">
+            <form>
+                <div class="input-group">
+                    <input type="text" class="decimal-input">
+                    <span>x 10</span>
+                    <input type="text" class="exponent-input">
+                </div>
+                <div class="round-off-group">
+                    <label class="round-off-label" for="round-off-method">Round-off method:</label>
+                    <select id="round-off-method">
+                        <option value="truncate">Truncate</option>
+                        <option value="round down">Round down</option>
+                        <option value="round up">Round up</option>
+                    </select>
+                </div>
+                <button type="button" class="convert-button"><a href="output.html">Convert</a></button>
+            </form>
+        </div>
+    </div>
+    <footer>
+        <p>By GROUP 14: Calugtong, Salic, Valladolid</p>
+    </footer>
+</body>
+</html>
