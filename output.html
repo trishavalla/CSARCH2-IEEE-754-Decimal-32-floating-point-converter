@@ -16,16 +16,20 @@
         </div>
         <div class="output-boxes">
             <div class="output-box">
-                <h2>Normalized</h2>
-                <p id="normalized-output">[Normalized output will be displayed here]</p>
+                <h2>Decimal</h2>
+                <p id="decimal-output">[Decimal output will be displayed here]</p>
             </div>
             <div class="output-box">
-                <h2>Binary</h2>
+                <h2>Binary (32-bit)</h2>
                 <p id="binary-output">[Binary output will be displayed here]</p>
             </div>
             <div class="output-box">
-                <h2>Hexadecimal</h2>
-                <p id="hexadecimal-output">[Hexadecimal output will be displayed here]</p>
+                <h2>Hexadecimal (32-bit)</h2>
+                <p id="hex-output">[Hexadecimal output will be displayed here]</p>
+            </div>
+            <div class="output-box">
+                <h2>Normalized</h2>
+                <p id="normalized-output">[Normalized output will be displayed here]</p>
             </div>
         </div>
         <div class="button-container">
@@ -39,11 +43,12 @@
 
     <script>
         function exportToText() {
-            const normalized = document.getElementById('normalized-output').innerText;
+            const decimal = document.getElementById('decimal-output').innerText;
             const binary = document.getElementById('binary-output').innerText;
-            const hexadecimal = document.getElementById('hexadecimal-output').innerText;
+            const hex = document.getElementById('hex-output').innerText;
+            const normalized = document.getElementById('normalized-output').innerText;
 
-            const text = `Normalized: ${normalized}\nBinary: ${binary}\nHexadecimal: ${hexadecimal}`;
+            const text = `Decimal: ${decimal}\nBinary: ${binary}\nHexadecimal: ${hex}\nNormalized: ${normalized}`;
 
             const blob = new Blob([text], { type: 'text/plain' });
             const url = URL.createObjectURL(blob);
@@ -54,6 +59,13 @@
             a.click();
             document.body.removeChild(a);
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('decimal-output').innerText = localStorage.getItem('decimal');
+            document.getElementById('binary-output').innerText = localStorage.getItem('binary');
+            document.getElementById('hex-output').innerText = localStorage.getItem('hexadecimal');
+            document.getElementById('normalized-output').innerText = localStorage.getItem('normalized');
+        });
     </script>
 </body>
 </html>
