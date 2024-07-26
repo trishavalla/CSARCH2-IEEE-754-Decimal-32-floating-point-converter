@@ -35,6 +35,7 @@
                         <option value="truncate">Truncate</option>
                         <option value="round down">Round down</option>
                         <option value="round up">Round up</option>
+                        <option value="round nearest">Round to Nearest (Ties to Even)</option>
                     </select>
                 </div>
                 <button type="submit" class="convert-button">Convert</button>
@@ -74,6 +75,25 @@
             var baseNumber = parseFloat(document.getElementById('baseNumber').value);
             var exponent = parseInt(document.getElementById('exponent').value, 10);
             var number = baseNumber * Math.pow(10, exponent);
+            
+            // Get selected rounding method
+            var roundingMethod = document.getElementById('round-off-method').value;
+
+            // Apply rounding method
+            switch (roundingMethod) {
+                case 'truncate':
+                    number = Math.trunc(number);
+                    break;
+                case 'round down':
+                    number = Math.floor(number);
+                    break;
+                case 'round up':
+                    number = Math.ceil(number);
+                    break;
+                case 'round nearest':
+                    number = Math.round(number);
+                    break;
+            }
 
             var ieee754 = new extIeee754();
             var decimalOutput = ieee754.to('dec', number);
@@ -90,6 +110,7 @@
             // Redirect to output.html
             window.location.href = 'output.html';
         }
+
     </script>
 </body>
 </html>
