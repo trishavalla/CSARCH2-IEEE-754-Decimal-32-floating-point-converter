@@ -90,6 +90,7 @@
         // Function to perform the conversion
         function convert() {
             // Retrieve the base number and exponent from the input fields
+// Retrieve the base number and exponent from the input fields
 var baseNumber = parseFloat(document.getElementById('baseNumber').value);
 var exponent = parseInt(document.getElementById('exponent').value, 10);
 var number = baseNumber * Math.pow(10, exponent); // Calculate the full number
@@ -171,9 +172,38 @@ switch (roundingMethod) {
         }
         break;
     case 'round nearest':
-        number = Math.round(number);
+        const roundToNearestEven = (num) => {
+            if (isNaN(num)) return NaN;
+
+            // Get the integer and decimal parts
+            const [integerPart, fractionalPart] = num.toString().split('.');
+
+            if (!fractionalPart) return num; // No fractional part to process
+
+            // Check the digit following the last significant digit
+            const fractionalNum = parseFloat('0.' + fractionalPart);
+            const lastDigit = parseInt(fractionalPart[fractionalPart.length - 1]);
+
+            // Check if the number is exactly halfway
+            if (lastDigit === 5) {
+                // Determine if the integer part is even or odd
+                const nextToLastDigit = fractionalPart[fractionalPart.length - 2] ? parseInt(fractionalPart[fractionalPart.length - 2]) : parseInt(integerPart[integerPart.length - 1]);
+                if (nextToLastDigit % 2 === 0) {
+                    return parseFloat(integerPart + '.' + fractionalPart.slice(0, -1));
+                } else {
+                    return parseFloat((parseFloat(integerPart + '.' + fractionalPart.slice(0, -1)) + Math.pow(10, -fractionalPart.length + 1)).toFixed(fractionalPart.length - 1));
+                }
+            } else {
+                return parseFloat((Math.round(fractionalNum * Math.pow(10, fractionalPart.length - 1)) / Math.pow(10, fractionalPart.length - 1)).toFixed(fractionalPart.length - 1));
+            }
+        };
+
+        number = roundToNearestEven(number);
         break;
 }
+
+// Proceed with further processing of the number
+
 
             // Create an instance of extIeee754 to handle IEEE-754 conversion
             var ieee754 = new extIeee754();
