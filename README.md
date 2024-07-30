@@ -39,8 +39,16 @@
 - `styles.css`: The css code for the style of the html files.
 
 ### Important Functions/Methods
-- `convert()`: Gathers input values, applies the selected rounding method, performs the conversion using `ieee754-converter.js`, and redirects to `output.html`.
-
+- convert(): Gathers input values, applies the selected rounding method, performs the conversion using ieee754-converter.js, and redirects to output.html.
+- exportToText(): Exports the displayed results as a text file for download.
+- DOMContentLoaded: Retrieves and displays conversion results from localStorage.
+- http.createServer: Creates the HTTP server to handle requests, read files from the server, and respond with appropriate content or error messages.
+- numberToArr32(number): Converts a decimal number to a 32-bit IEEE-754 format stored in an ArrayBuffer.
+- arrToBase(toBase, arr): Converts an array of bytes to a string in the specified base.
+- valid(base, number): Validates the number format based on the specified base.
+- from(fromBase, number): Converts a number from the specified base to decimal.
+- to(toBase, number): Converts a decimal number to the specified base.
+- normalize(number): Normalizes a number to IEEE-754 format, showing it in terms of mantissa and exponent
 
 ## Test Cases
 
