@@ -52,10 +52,11 @@
 
 ## Test Cases
 
-### Test 1
+### Normal
 - **Test 1**: Brief description of what this test checks.
 - **Test 2**: Brief description of what this test checks.
 - **Test 3**: Brief description of what this test checks.
 
-### Test 2
+### Special cases
+### Different inputs
 
