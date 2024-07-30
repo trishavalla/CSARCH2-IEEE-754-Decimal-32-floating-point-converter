@@ -39,7 +39,7 @@
 - `styles.css`: The css code for the style of the html files.
 
 ### Important Functions/Methods
-- Highlight key functions or methods with brief descriptions.
+- `convert()`: Gathers input values, applies the selected rounding method, performs the conversion using `ieee754-converter.js`, and redirects to `output.html`.
 
 
 ## Test Cases
