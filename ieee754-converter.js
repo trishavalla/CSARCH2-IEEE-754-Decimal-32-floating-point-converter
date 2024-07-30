@@ -123,11 +123,11 @@ function extIeee754() {
          */
         to: function (toBase, number) {
             if (number === Infinity) {
-                if (toBase === 'dec') return 'NaN';
+                if (toBase === 'dec') return 'Infinity';
                 if (toBase === 'bin32') return '0 11111111 00000000000000000000000'; 
                 if (toBase === 'hex32') return '7F800000'; 
             } else if (number === -Infinity) {
-                if (toBase === 'dec') return '-NaN';
+                if (toBase === 'dec') return '-Infinity';
                 if (toBase === 'bin32') return '1 11111111 00000000000000000000000'; 
                 if (toBase === 'hex32') return 'FF800000';
             }
