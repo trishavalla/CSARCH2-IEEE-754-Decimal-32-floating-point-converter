@@ -6,11 +6,13 @@
     <title>IEEE-754 Decimal-32 Floating-Point Converter</title>
     <link rel="stylesheet" href="layout/styles.css">
     <style>
+        /* Initially hide the output boxes */
         .output-boxes {
-            display: none; /* Hide the output boxes initially */
+            display: none;
         }
+        /* Show the output boxes when results are available */
         .output-boxes.show {
-            display: block; /* Show the output boxes when results are available */
+            display: block;
         }
     </style>
 </head>
@@ -18,17 +20,24 @@
     <header>
         <h1>IEEE-754 Decimal-32 floating-point <span>converter</span></h1>
     </header>
+
     <div class="container-decimal">
+        <!-- Title for the decimal input section -->
         <div class="container-title-decimal">
             Enter decimal:
         </div>
+
+        <!-- Converter form for user input -->
         <div class="converter-box">
             <form id="converter-form">
+                <!-- Input fields for the base number and exponent -->
                 <div class="input-group">
                     <input type="text" id="baseNumber" class="decimal-input" required>
                     <span>x 10^</span>
                     <input type="text" id="exponent" class="exponent-input" required>
                 </div>
+
+                <!-- Dropdown for selecting the round-off method -->
                 <div class="round-off-group">
                     <label class="round-off-label" for="round-off-method">Round-off method:</label>
                     <select id="round-off-method">
@@ -38,10 +47,13 @@
                         <option value="round nearest">Round to Nearest (Ties to Even)</option>
                     </select>
                 </div>
+
+                <!-- Convert button to trigger the conversion -->
                 <button type="submit" class="convert-button">Convert</button>
             </form>
         </div>
-        <!-- Output fields -->
+
+        <!-- Output fields to display conversion results -->
         <div class="output-boxes" id="output-boxes">
             <div class="output-box">
                 <h2>Decimal</h2>
@@ -61,25 +73,31 @@
             </div>
         </div>
     </div>
+
     <footer>
         <p>By GROUP 14: Calugtong, Salic, Valladolid</p>
     </footer>
+
+    <!-- JavaScript to handle the conversion logic -->
     <script src="ieee754-converter.js"></script>
     <script>
+        // Add an event listener to handle form submission
         document.getElementById('converter-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            convert();
+            event.preventDefault(); // Prevent the default form submission
+            convert(); // Call the convert function
         });
 
+        // Function to perform the conversion
         function convert() {
+            // Retrieve the base number and exponent from the input fields
             var baseNumber = parseFloat(document.getElementById('baseNumber').value);
             var exponent = parseInt(document.getElementById('exponent').value, 10);
-            var number = baseNumber * Math.pow(10, exponent);
-            
-            // Get selected rounding method
+            var number = baseNumber * Math.pow(10, exponent); // Calculate the full number
+
+            // Get the selected rounding method
             var roundingMethod = document.getElementById('round-off-method').value;
 
-            // Apply rounding method
+            // Apply the rounding method
             switch (roundingMethod) {
                 case 'truncate':
                     number = Math.trunc(number);
@@ -95,22 +113,24 @@
                     break;
             }
 
+            // Create an instance of extIeee754 to handle IEEE-754 conversion
             var ieee754 = new extIeee754();
+
+            // Convert the number to various formats
             var decimalOutput = ieee754.to('dec', number);
             var binaryOutput = ieee754.to('bin32', number);
             var hexOutput = ieee754.to('hex32', number);
             var normalizedOutput = ieee754.normalize(number);
 
-            // Save results to localStorage
+            // Save the results to localStorage
             localStorage.setItem('decimal', decimalOutput);
             localStorage.setItem('binary', binaryOutput);
             localStorage.setItem('hexadecimal', hexOutput);
             localStorage.setItem('normalized', normalizedOutput);
 
-            // Redirect to output.html
+            // Redirect to output.html to display the results
             window.location.href = 'output.html';
         }
-
     </script>
 </body>
 </html>
