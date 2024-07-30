@@ -90,28 +90,90 @@
         // Function to perform the conversion
         function convert() {
             // Retrieve the base number and exponent from the input fields
-            var baseNumber = parseFloat(document.getElementById('baseNumber').value);
-            var exponent = parseInt(document.getElementById('exponent').value, 10);
-            var number = baseNumber * Math.pow(10, exponent); // Calculate the full number
+var baseNumber = parseFloat(document.getElementById('baseNumber').value);
+var exponent = parseInt(document.getElementById('exponent').value, 10);
+var number = baseNumber * Math.pow(10, exponent); // Calculate the full number
 
-            // Get the selected rounding method
-            var roundingMethod = document.getElementById('round-off-method').value;
+// Get the selected rounding method
+var roundingMethod = document.getElementById('round-off-method').value;
 
-            // Apply the rounding method
-            switch (roundingMethod) {
-                case 'truncate':
-                    number = Math.trunc(number);
-                    break;
-                case 'round down':
-                    number = Math.floor(number);
-                    break;
-                case 'round up':
-                    number = Math.ceil(number);
-                    break;
-                case 'round nearest':
-                    number = Math.round(number);
-                    break;
+// Apply the rounding method
+switch (roundingMethod) {
+    case 'truncate':
+        // Truncate last digit
+        let numStr = number.toString();
+        if (numStr.includes('.')) {
+            let [integerPart, decimalPart] = numStr.split('.');
+            
+            if (decimalPart.length > 0) {
+                decimalPart = decimalPart.slice(0, -1);
             }
+
+            number = parseFloat(integerPart + (decimalPart.length > 0 ? '.' + decimalPart : ''));
+        }
+        break;
+    case 'round up':
+        let numStrForRoundUp = number.toString();
+        const isFloatUp = numStrForRoundUp.includes('.');
+        
+        // Find significant figures
+        let significantFiguresUp = 0;
+        if (isFloatUp) {
+            const [integerPart, fractionalPart] = numStrForRoundUp.split('.');
+            significantFiguresUp = integerPart.replace(/^0+/, '').length + fractionalPart.replace(/0+$/, '').length;
+            if (integerPart === '0') {
+                significantFiguresUp = fractionalPart.replace(/^0+/, '').length;
+            }
+        } else {
+            significantFiguresUp = numStrForRoundUp.replace(/^0+/, '').length;
+        }
+        
+        if (significantFiguresUp === 0) {
+            number = Math.ceil(number);
+        } else {
+            // Determine rounding precision
+            const decimalPlacesUp = numStrForRoundUp.includes('.') ? numStrForRoundUp.split('.')[1].length : 0;
+            const roundingPrecisionUp = decimalPlacesUp - 1;
+            const factorUp = Math.pow(10, roundingPrecisionUp);
+            
+            // Round up and format the result
+            const roundedNumberUp = Math.ceil(number * factorUp) / factorUp;
+            number = parseFloat(roundedNumberUp.toFixed(roundingPrecisionUp).replace(/(\.\d*?[1-9])0+$/, '$1').replace(/\.$/, ''));
+        }
+        break;
+    case 'round down':
+        let numStrForRoundDown = number.toString();
+        const isFloatDown = numStrForRoundDown.includes('.');
+        
+        // Find significant figures
+        let significantFiguresDown = 0;
+        if (isFloatDown) {
+            const [integerPart, fractionalPart] = numStrForRoundDown.split('.');
+            significantFiguresDown = integerPart.replace(/^0+/, '').length + fractionalPart.replace(/0+$/, '').length;
+            if (integerPart === '0') {
+                significantFiguresDown = fractionalPart.replace(/^0+/, '').length;
+            }
+        } else {
+            significantFiguresDown = numStrForRoundDown.replace(/^0+/, '').length;
+        }
+        
+        if (significantFiguresDown === 0) {
+            number = Math.floor(number);
+        } else {
+            // Determine rounding precision
+            const decimalPlacesDown = numStrForRoundDown.includes('.') ? numStrForRoundDown.split('.')[1].length : 0;
+            const roundingPrecisionDown = decimalPlacesDown - 1;
+            const factorDown = Math.pow(10, roundingPrecisionDown);
+            
+            // Round down and format the result
+            const roundedNumberDown = Math.floor(number * factorDown) / factorDown;
+            number = parseFloat(roundedNumberDown.toFixed(roundingPrecisionDown).replace(/(\.\d*?[1-9])0+$/, '$1').replace(/\.$/, ''));
+        }
+        break;
+    case 'round nearest':
+        number = Math.round(number);
+        break;
+}
 
             // Create an instance of extIeee754 to handle IEEE-754 conversion
             var ieee754 = new extIeee754();
