@@ -32,11 +32,11 @@
 ## Code Analysis
 
 ### File Descriptions
-- `server.js`: 
-- `ieee754-converter.js`: 
-- `decimal.html`:
-- `output.html`:
-- `styles.css`: 
+- `server.js`: Sets up a basic HTTP server to serve static files (e.g., HTML, CSS, JavaScript) and handle HTTP requests.
+- `ieee754-converter.js`: Contains functions for converting numbers to and from IEEE-754 Decimal-32 floating-point format. Handles conversion between decimal, binary, and hexadecimal representations.
+- `decimal.html`: Provides a user interface for inputting a decimal number and selecting a rounding method. It triggers the conversion process and redirects to output.html.
+- `output.html`: Displays the conversion results from decimal.html, showing the decimal, binary, and hexadecimal outputs. It also provides options to go back to decimal.html or export the results.
+- `styles.css`: The css code for the style of the html files.
 
 ### Important Functions/Methods
 - Highlight key functions or methods with brief descriptions.
