@@ -91,6 +91,7 @@
         function convert() {
             // Retrieve the base number and exponent from the input fields
 // Retrieve the base number and exponent from the input fields
+// Retrieve the base number and exponent from the input fields
 var baseNumber = parseFloat(document.getElementById('baseNumber').value);
 var exponent = parseInt(document.getElementById('exponent').value, 10);
 var number = baseNumber * Math.pow(10, exponent); // Calculate the full number
@@ -101,18 +102,51 @@ var roundingMethod = document.getElementById('round-off-method').value;
 // Apply the rounding method
 switch (roundingMethod) {
     case 'truncate':
-        // Truncate last digit
-        let numStr = number.toString();
+        // Convert number to a string for manipulation
+        let numStr = number.toExponential(); // Use scientific notation to handle very small numbers
+        
+        // Determine if the number is in scientific notation
+        if (numStr.includes('e')) {
+            // Handle scientific notation
+            const [base, expStr] = numStr.split('e');
+            const exponentValue = parseInt(expStr, 10);
+            
+            // Convert base to a number
+            number = parseFloat(base) * Math.pow(10, exponentValue);
+            numStr = number.toString(); // Reconvert to string for manipulation
+        }
+        
         if (numStr.includes('.')) {
+            // Split into integer and decimal parts
             let [integerPart, decimalPart] = numStr.split('.');
             
+            // Determine the number of significant figures
+            const significantFigures = decimalPart.replace(/0+$/, '').length + integerPart.replace(/^0+/, '').length;
+            
+            // Calculate the number of decimal places to retain
+            let decimalsToKeep = Math.max(significantFigures - integerPart.replace(/^0+/, '').length, 0);
+            
+            // Truncate decimal part
             if (decimalPart.length > 0) {
-                decimalPart = decimalPart.slice(0, -1);
+                decimalPart = decimalPart.slice(0, decimalsToKeep);
             }
 
+            // Reconstruct the number and parse to float
             number = parseFloat(integerPart + (decimalPart.length > 0 ? '.' + decimalPart : ''));
         }
+        
+        // Format the number to avoid scientific notation and ensure consistent decimal places
+        number = number.toPrecision(10); // Use toPrecision for very small numbers
+        number = number.replace(/(\.\d*?[1-9])0+$/, '$1').replace(/\.$/, '');
         break;
+
+
+
+// The number variable now contains the truncated value with appropriate formatting
+
+
+
+
     case 'round up':
         let numStrForRoundUp = number.toString();
         const isFloatUp = numStrForRoundUp.includes('.');
@@ -172,37 +206,9 @@ switch (roundingMethod) {
         }
         break;
     case 'round nearest':
-        const roundToNearestEven = (num) => {
-            if (isNaN(num)) return NaN;
-
-            // Get the integer and decimal parts
-            const [integerPart, fractionalPart] = num.toString().split('.');
-
-            if (!fractionalPart) return num; // No fractional part to process
-
-            // Check the digit following the last significant digit
-            const fractionalNum = parseFloat('0.' + fractionalPart);
-            const lastDigit = parseInt(fractionalPart[fractionalPart.length - 1]);
-
-            // Check if the number is exactly halfway
-            if (lastDigit === 5) {
-                // Determine if the integer part is even or odd
-                const nextToLastDigit = fractionalPart[fractionalPart.length - 2] ? parseInt(fractionalPart[fractionalPart.length - 2]) : parseInt(integerPart[integerPart.length - 1]);
-                if (nextToLastDigit % 2 === 0) {
-                    return parseFloat(integerPart + '.' + fractionalPart.slice(0, -1));
-                } else {
-                    return parseFloat((parseFloat(integerPart + '.' + fractionalPart.slice(0, -1)) + Math.pow(10, -fractionalPart.length + 1)).toFixed(fractionalPart.length - 1));
-                }
-            } else {
-                return parseFloat((Math.round(fractionalNum * Math.pow(10, fractionalPart.length - 1)) / Math.pow(10, fractionalPart.length - 1)).toFixed(fractionalPart.length - 1));
-            }
-        };
-
-        number = roundToNearestEven(number);
+        number = Math.round(number);
         break;
 }
-
-// Proceed with further processing of the number
 
 
             // Create an instance of extIeee754 to handle IEEE-754 conversion
