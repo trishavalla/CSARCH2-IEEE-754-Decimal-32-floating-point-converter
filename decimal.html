@@ -89,60 +89,52 @@
 
         // Function to perform the conversion
         function convert() {
-            // Retrieve the base number and exponent from the input fields
-// Retrieve the base number and exponent from the input fields
-// Retrieve the base number and exponent from the input fields
-var baseNumber = parseFloat(document.getElementById('baseNumber').value);
-var exponent = parseInt(document.getElementById('exponent').value, 10);
-var number = baseNumber * Math.pow(10, exponent); // Calculate the full number
+    // Retrieve the base number and exponent from the input fields
+    var baseNumber = parseFloat(document.getElementById('baseNumber').value);
+    var exponent = parseInt(document.getElementById('exponent').value, 10);
+    var number = baseNumber * Math.pow(10, exponent); // Calculate the full number
 
-// Get the selected rounding method
-var roundingMethod = document.getElementById('round-off-method').value;
+    // Get the selected rounding method
+    var roundingMethod = document.getElementById('round-off-method').value;
 
-// Apply the rounding method
-switch (roundingMethod) {
-    case 'truncate':
-        // Convert number to a string for manipulation
-        let numStr = number.toExponential(); // Use scientific notation to handle very small numbers
-        
-        // Determine if the number is in scientific notation
-        if (numStr.includes('e')) {
-            // Handle scientific notation
-            const [base, expStr] = numStr.split('e');
-            const exponentValue = parseInt(expStr, 10);
-            
-            // Convert base to a number
-            number = parseFloat(base) * Math.pow(10, exponentValue);
-            numStr = number.toString(); // Reconvert to string for manipulation
-        }
-        
-        if (numStr.includes('.')) {
-            // Split into integer and decimal parts
-            let [integerPart, decimalPart] = numStr.split('.');
-            
-            // Determine the number of significant figures
-            const significantFigures = decimalPart.replace(/0+$/, '').length + integerPart.replace(/^0+/, '').length;
-            
-            // Calculate the number of decimal places to retain
-            let decimalsToKeep = Math.max(significantFigures - integerPart.replace(/^0+/, '').length, 0);
-            
-            // Truncate decimal part
-            if (decimalPart.length > 0) {
-                decimalPart = decimalPart.slice(0, decimalsToKeep);
+    // Apply the rounding method
+    switch (roundingMethod) {
+        case 'truncate':
+    // Convert number to string for manipulation
+    let numberStr = number.toString();
+
+    // Check if the number has a decimal part
+    if (numberStr.includes('.')) {
+        let [integerPart, decimalPart] = numberStr.split('.');
+
+        // Check if there's a whole number part
+        if (parseInt(integerPart) !== 0) {
+            // Drop the decimal part if there's a whole number and only one nonzero digit in the decimal part
+            if (decimalPart.replace(/^0+/, '').length === 1) {
+                number = parseFloat(integerPart); // Keep only the whole number part
+            } else {
+                // Truncate the last digit of the decimal part
+                decimalPart = decimalPart.slice(0, -1);
+                number = parseFloat(integerPart + (decimalPart.length > 0 ? '.' + decimalPart : ''));
             }
-
-            // Reconstruct the number and parse to float
-            number = parseFloat(integerPart + (decimalPart.length > 0 ? '.' + decimalPart : ''));
+        } else {
+            // Whole number part is zero
+            // Check if the decimal part has only one nonzero digit
+            const nonzeroDigits = decimalPart.replace(/^0+/, '').length;
+            if (nonzeroDigits === 1) {
+                // Retain original string representation if only one nonzero digit
+                number = parseFloat(numberStr); // Keep original number
+            } else {
+                // Truncate the last digit of the decimal part
+                decimalPart = decimalPart.slice(0, -1);
+                number = parseFloat('0.' + decimalPart);
+            }
         }
-        
-        // Format the number to avoid scientific notation and ensure consistent decimal places
-        number = number.toPrecision(10); // Use toPrecision for very small numbers
-        number = number.replace(/(\.\d*?[1-9])0+$/, '$1').replace(/\.$/, '');
-        break;
-
-
-
-// The number variable now contains the truncated value with appropriate formatting
+    } else {
+        // No decimal part to truncate
+        number = parseFloat(numberStr);
+    }
+    break;
 
 
 
