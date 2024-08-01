@@ -55,53 +55,83 @@ to(toBase, number): Converts a decimal number to the specified base.
 normalize(number): Normalizes a number to IEEE-754 format, ensuring the number is shown correctly with the proper representation of mantissa and exponent.
 
 ## Test Cases
+Test Case 1
 
-1.	Test Case 1
-o	Input: 2.5678 × 10^2
-o	Number: 256.78
-o	Round Up: 256.8 
-o	Hexadecimal: 43806666
-o	Binary: 0 10000111 00000000110011001100110
+- Input: 2.5678 × 10^2
 
-2.	Test Case 2
-o	Input: 3.678 × 10^-3
-o	Number: 0.003678
-o	Round Down: 0.00000367 
-o	Hexadecimal: 36764A1F
-o	Binary: 0 01101100 11101100100101000011111
+- Number: 256.78
 
-3.	Test Case 3
-o	Input: 4.25× 10^1
-o	Number: 42.0
-o	Round Even: 42.0
-o	Hexadecimal: 42280000
-o	Binary: 0 10000100 01010000000000000000000
+- Round Up: 256.8
 
-4.	Test Case 4
-o	Input: 2 × 10^-45
-o	Number: 2e-45
-o	Do not round off: 2e-45
-o	Hexadecimal: 00000001
-o	Binary: 0 00000000 00000000000000000000001
+- Hexadecimal: 43806666
 
-5.	Test Case 5
-o	Input: -0.4567 × 10^2
-o	Number: -45.67
-o	Round up: -45.6 
-o	Hexadecimal: 0xC2380000
-o	Binary: 1 10000010 10111010010000000000000
+- Binary: 0 10000111 00000000110011001100110
+
+Test Case 2
+
+Input: 3.678 × 10^-3
+
+Number: 0.003678
+
+Round Down: 0.00000367
+
+Hexadecimal: 36764A1F
+
+Binary: 0 01101100 11101100100101000011111
+
+Test Case 3
+
+Input: 4.25× 10^1
+
+Number: 42.0
+
+Round Even: 42.0
+
+Hexadecimal: 42280000
+
+Binary: 0 10000100 01010000000000000000000
+
+Test Case 4
+
+Input: 2 × 10^-45
+
+Number: 2e-45
+
+Do not round off: 2e-45
+
+Hexadecimal: 00000001
+
+Binary: 0 00000000 00000000000000000000001
+
+Test Case 5
+
+Input: -0.4567 × 10^2
+
+Number: -45.67
+
+Round up: -45.6
+
+Hexadecimal: 0xC2380000
+
+Binary: 1 10000010 10111010010000000000000
 
 Special Cases
-6.	Test Case 9 (Positive Infinity)
-o	Input: Infinity × 10^0
-o	Number: Infinity
-o	Hexadecimal: 7F800000
-o	Binary: 0 11111111 00000000000000000000000
+Test Case 9 (Positive Infinity)
 
-7.	Test Case 10 (NaN)
-o	Input: NaN × 10^0
-o	Number: NaN
-o	Hexadecimal: 7FC00000
-o	Binary: 0 11111111 10000000000000000000000
+Input: Infinity × 10^0
 
+Number: Infinity
 
+Hexadecimal: 7F800000
+
+Binary: 0 11111111 00000000000000000000000
+
+Test Case 10 (NaN)
+
+Input: NaN × 10^0
+
+Number: NaN
+
+Hexadecimal: 7FC00000
+
+Binary: 0 11111111 10000000000000000000000
