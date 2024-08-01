@@ -2,7 +2,7 @@
   "name": "csarch2-ieee-754-decimal-32-floating-point-converter-main",
   "version": "1.0.0",
   "description": "How: git clone https://github.com/trishavalla/CSARCH2-IEEE-754-Decimal-32-floating-point-converter.git open a terminal to the directory node server.js",
-  "main": "ieee754-converter.js",
+  "main": "script.js",
   "scripts": {
     "test": "node server.js",
     "start": "node server.js"
