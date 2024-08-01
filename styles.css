@@ -1,0 +1,153 @@
+/* Common Styles */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #cce780; /* Ensure the background color is applied */
+}
+
+#ieee754Result {
+    display: none;
+}
+
+.binary-part {
+    display: inline-block;
+    margin-right: 100px; /* Adjust spacing as needed */
+}
+
+body {
+    font-family: Lucida Console;
+    background-color: #cce780;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-color: #076907;
+    padding: 20px;
+    color: white;
+}
+
+header h1 {
+    font-size: 18px;
+    color: white;
+    margin: 0;
+    text-align: left;
+    margin-left: 10px;
+}
+
+header h1 span {
+    color: #a9fe54;
+}
+
+footer {
+    margin-top: 20px;
+    text-align: center;
+}
+
+footer p {
+    font-size: 12px;
+    color: #076907;
+    font-weight: bold;
+}
+
+/* Main Container */
+.container {
+    max-width: 800px;
+    background-color: #E7E9EC; /* Background color for container */
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #076907; /* Header color */
+}
+
+/* Input Group */
+.input-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.decimal-input, .exponent-input {
+    width: 120px;
+    padding: 10px;
+    margin: 0 10px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background-color: #E7E9EC; /* Background color for inputs */
+    color: #076907; /* Text color */
+}
+
+.operation-select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background-color: #E7E9EC; /* Background color for select */
+    color: #076907; /* Text color */
+}
+
+/* Button Styles */
+.buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.action-button {
+    background-color: #ccff99; /* Button color */
+    border: none;
+    color: #076907; /* Text color */
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.action-button:hover {
+    background-color: #99ff66; /* Hover color */
+}
+
+.result-text, .ieee754-result {
+    text-align: center;
+    font-size: 18px;
+    color: #076907; /* Result text color */
+}
+
+/* Output Boxes */
+.output-boxes {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.output-box {
+    background-color: #E7E9EC; /* Background color for output boxes */
+    padding: 20px;
+    margin: 10px;
+    border-radius: 8px;
+    flex: 1 1 calc(33.333% - 40px);
+    box-sizing: border-box;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.output-box h2 {
+    margin-top: 0;
+    color: #076907; /* Header color for output boxes */
+}
+
+.output-box p {
+    font-size: 16px;
+    color: #076907; /* Text color */
+}
