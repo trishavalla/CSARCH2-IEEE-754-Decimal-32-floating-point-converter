@@ -69,69 +69,69 @@ Test Case 1
 
 Test Case 2
 
-Input: 3.678 × 10^-3
+- Input: 3.678 × 10^-3
 
-Number: 0.003678
+- Number: 0.003678
 
-Round Down: 0.00000367
+- Round Down: 0.00000367
 
-Hexadecimal: 36764A1F
+- Hexadecimal: 36764A1F
 
-Binary: 0 01101100 11101100100101000011111
+- Binary: 0 01101100 11101100100101000011111
 
 Test Case 3
 
-Input: 4.25× 10^1
+- Input: 4.25× 10^1
 
-Number: 42.0
+- Number: 42.0
 
-Round Even: 42.0
+- Round Even: 42.0
 
-Hexadecimal: 42280000
+- Hexadecimal: 42280000
 
-Binary: 0 10000100 01010000000000000000000
+- Binary: 0 10000100 01010000000000000000000
 
 Test Case 4
 
-Input: 2 × 10^-45
+- Input: 2 × 10^-45
 
-Number: 2e-45
+- Number: 2e-45
 
-Do not round off: 2e-45
+- Do not round off: 2e-45
 
-Hexadecimal: 00000001
+- Hexadecimal: 00000001
 
-Binary: 0 00000000 00000000000000000000001
+- Binary: 0 00000000 00000000000000000000001
 
 Test Case 5
 
-Input: -0.4567 × 10^2
+- Input: -0.4567 × 10^2
 
-Number: -45.67
+- Number: -45.67
 
-Round up: -45.6
+- Round up: -45.6
 
-Hexadecimal: 0xC2380000
+- Hexadecimal: 0xC2380000
 
-Binary: 1 10000010 10111010010000000000000
+- Binary: 1 10000010 10111010010000000000000
 
 Special Cases
 Test Case 9 (Positive Infinity)
 
-Input: Infinity × 10^0
+- Input: Infinity × 10^0
 
-Number: Infinity
+- Number: Infinity
 
-Hexadecimal: 7F800000
+- Hexadecimal: 7F800000
 
-Binary: 0 11111111 00000000000000000000000
+- Binary: 0 11111111 00000000000000000000000
 
 Test Case 10 (NaN)
 
-Input: NaN × 10^0
+- Input: NaN × 10^0
 
-Number: NaN
+- Number: NaN
 
-Hexadecimal: 7FC00000
+- Hexadecimal: 7FC00000
 
-Binary: 0 11111111 10000000000000000000000
+- Binary: 0 11111111 10000000000000000000000
