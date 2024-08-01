@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IEEE 754 Single Precision</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/decimal.js/10.4.1/decimal.min.js"></script>
+    <script src="script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>IEEE-754 Single Precision Converter</h1>
+        <h1>| Calugtong | Salic | Valladolid |</h1>
+        <div class="input-group">
+            <input type="text" id="baseInput" class="decimal-input" placeholder="Enter base number" required>
+            <span>x 10^</span>
+            <input type="text" id="exponentInput" class="exponent-input" placeholder="Enter exponent" required>
+        </div>
+        <select id="operation" class="operation-select">
+            <option value="none">Do not round off</option>
+            <option value="truncate">Truncate Last Digit</option>
+            <option value="roundUp">Round Up</option>
+            <option value="roundDown">Round Down</option>
+            <option value="roundEven">Round Nearest Even</option>
+        </select>
+        <div class="buttons">
+            <button onclick="processNumber()" class="action-button">Apply Operation</button>
+            <button onclick="downloadTxtFile()" class="action-button">Download as TXT</button>
+        </div>
+        <p id="result" class="result-text">RESULT</p>
+        <div class="output-boxes">
+            <div class="output-box">
+                <h2>Decimal</h2>
+                <p id="decimal-output">[Decimal output will be displayed here]</p>
+            </div>
+            <div class="output-box">
+                <h2>Binary (32-bit)</h2>
+                <p id="binary-output">
+                    <span class="binary-part sign">[Sign]</span>
+                    <span class="binary-part exponent">[Exponent]</span>
+                    <span class="binary-part mantissa">[Mantissa]</span>
+                </p>
+            </div>
+            <div class="output-box">
+                <h2>Hexadecimal (32-bit)</h2>
+                <p id="hex-output">[Hexadecimal output will be displayed here]</p>
+            </div>
+        </div>
+        <p id="ieee754Result" class="ieee754-result">IEEE-754 Representation will be displayed here</p>
+    </div>
+    <script>
+        function downloadTxtFile() {
+            const decimalOutput = document.getElementById('decimal-output').innerText;
+            const binaryOutput = document.getElementById('binary-output').innerText;
+            const hexOutput = document.getElementById('hex-output').innerText;
+            const ieee754Result = document.getElementById('ieee754Result').innerText;
+
+            // Combine the outputs into a single string
+            const textContent = `Decimal Output: ${decimalOutput}\nBinary Output (32-bit): ${binaryOutput}\nHexadecimal Output (32-bit): ${hexOutput}\nIEEE-754 Representation: ${ieee754Result}`;
+
+            // Create a Blob with the text content
+            const blob = new Blob([textContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+
+            // Create a temporary link element and trigger the download
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'output.txt';
+            document.body.appendChild(a);
+            a.click();
+
+            // Clean up
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
